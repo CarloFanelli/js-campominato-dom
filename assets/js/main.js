@@ -1,3 +1,8 @@
+/**
+ * 
+ * @param {} elementDOM element where the game has to be insert
+ * @param {number} squareNumber number of square, for choosing difficult of the game
+ */
 function createField(elementDOM, squareNumber) {
 
     let i = 0;
@@ -41,6 +46,11 @@ function createField(elementDOM, squareNumber) {
 
 }
 
+/**
+ * 
+ * @param {number} squareNumber number of squares to play
+ * @returns array with bomb position
+ */
 function generateBombs(squareNumber) {
 
     const bombNumber = 16;
@@ -49,7 +59,7 @@ function generateBombs(squareNumber) {
     for (let i = 0; i < bombNumber; i++) {
 
         const bombPosition = Math.floor(Math.random() * (squareNumber + 1) );
-        console.log(bombPosition);
+       // console.log(bombPosition);
 
         if (bombsPositions.includes(bombPosition)) {
             i--;
@@ -57,9 +67,11 @@ function generateBombs(squareNumber) {
             bombsPositions.push(bombPosition);
         }
 
-        console.log(bombsPositions);
+        //console.log(bombsPositions);
 
     }
+
+    return bombsPositions;
 
 }
 
@@ -70,6 +82,9 @@ function generateBombs(squareNumber) {
     createField(fieldDOM, 100);
 
 }) */
+
+
+// game generator with difficults
 
 document.getElementById('generateGame').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -84,16 +99,19 @@ document.getElementById('generateGame').addEventListener('submit', function (e) 
 
         createField(fieldDOM, 100);
         generateBombs(100);
+        console.log(generateBombs(100));
 
     } else if (difficultDOM.value === 'mid') {
 
         createField(fieldDOM, 81);
         generateBombs(81);
+        console.log(generateBombs(81));
 
     } else if (difficultDOM.value === 'hard') {
 
         createField(fieldDOM, 49);
         generateBombs(49);
+        console.log(generateBombs(49));
 
     }
 
