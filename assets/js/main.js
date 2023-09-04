@@ -40,6 +40,7 @@ function createField(elementDOM, squareNumber) {
         elementDOM.append(squareDOM);
 
         i++;
+        
         squareDOM.addEventListener('click', function Event () {
 
             console.log(squareValue);
@@ -57,18 +58,17 @@ function createField(elementDOM, squareNumber) {
 
                 document.getElementById('punteggio').innerHTML = `hai perso, il tuo punteggio è: ${playerPoints}`;
 
-                //this.removeEventListener('click', Event ) ;
-
-                for (let i = 0; i < squareNumber; i++) {    
-
+                this.removeEventListener('click', Event ) ;
+                
+                /* for (let i = 0; i < squareNumber; i++) {    
 
                     document.getElementById(`square${i}`).removeEventListener('click', Event);
 
                     //console.log(allSquareDOM);
 
-                }
+                } */
 
-            } else if(!bombsPositions.includes(squareValue)){
+            } else {
 
                 this.classList.add('bg-info')
 
@@ -168,5 +168,3 @@ document.getElementById('generateGame').addEventListener('submit', function (e) 
 document.getElementById('reload').addEventListener('click', function () {
     location.reload();
 })
-
-
