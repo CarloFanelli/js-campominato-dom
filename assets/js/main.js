@@ -20,6 +20,7 @@ function createField(elementDOM, squareNumber) {
         squareDOM.append(squareTag);
 
         squareDOM.classList.add('square');
+        squareDOM.style.width = `calc( 100% / ${Math.sqrt(squareNumber)})`;
         squareTag.classList.add('d-none')
 
         elementDOM.append(squareDOM);
@@ -42,11 +43,37 @@ function createField(elementDOM, squareNumber) {
 
 }
 
-document.getElementById('create-field').addEventListener('click', function () {
+/* document.getElementById('create-field').addEventListener('click', function () {
 
     const fieldDOM = document.querySelector('.field');
 
     createField(fieldDOM, 100);
+
+}) */
+
+document.getElementById('generateGame').addEventListener('submit',function(e){
+    e.preventDefault();
+
+    const fieldDOM = document.querySelector('.field');
+
+    const difficultDOM = document.getElementById('difficult');
+
+    console.log(difficultDOM.value);
+
+    if (difficultDOM.value === 'easy') {
+        
+        createField(fieldDOM, 100);
+    
+    } else if (difficultDOM.value === 'mid') {
+        
+        createField(fieldDOM, 81);
+    
+    } else if (difficultDOM.value === 'hard') {
+        
+        createField(fieldDOM, 49);
+    
+    }
+
 
 })
 
