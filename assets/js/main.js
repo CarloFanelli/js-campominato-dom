@@ -13,7 +13,7 @@ function createField(elementDOM, squareNumber) {
 
         const squareTag = document.createElement('h1')
 
-        const squareValue = i +1;
+        const squareValue = i + 1;
 
         squareTag.append(squareValue);
 
@@ -24,8 +24,6 @@ function createField(elementDOM, squareNumber) {
         squareTag.classList.add('d-none')
 
         elementDOM.append(squareDOM);
-
-
 
         squareDOM.addEventListener('click', function () {
 
@@ -43,6 +41,28 @@ function createField(elementDOM, squareNumber) {
 
 }
 
+function generateBombs(squareNumber) {
+
+    const bombNumber = 16;
+    const bombsPositions = [];
+
+    for (let i = 0; i < bombNumber; i++) {
+
+        const bombPosition = Math.floor(Math.random() * (squareNumber + 1) );
+        console.log(bombPosition);
+
+        if (bombsPositions.includes(bombPosition)) {
+            i--;
+        }else{
+            bombsPositions.push(bombPosition);
+        }
+
+        console.log(bombsPositions);
+
+    }
+
+}
+
 /* document.getElementById('create-field').addEventListener('click', function () {
 
     const fieldDOM = document.querySelector('.field');
@@ -51,7 +71,7 @@ function createField(elementDOM, squareNumber) {
 
 }) */
 
-document.getElementById('generateGame').addEventListener('submit',function(e){
+document.getElementById('generateGame').addEventListener('submit', function (e) {
     e.preventDefault();
 
     const fieldDOM = document.querySelector('.field');
@@ -61,17 +81,20 @@ document.getElementById('generateGame').addEventListener('submit',function(e){
     console.log(difficultDOM.value);
 
     if (difficultDOM.value === 'easy') {
-        
+
         createField(fieldDOM, 100);
-    
+        generateBombs(100);
+
     } else if (difficultDOM.value === 'mid') {
-        
+
         createField(fieldDOM, 81);
-    
+        generateBombs(81);
+
     } else if (difficultDOM.value === 'hard') {
-        
+
         createField(fieldDOM, 49);
-    
+        generateBombs(49);
+
     }
 
 
