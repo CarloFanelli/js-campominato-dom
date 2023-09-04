@@ -5,6 +5,10 @@
  */
 function createField(elementDOM, squareNumber) {
 
+    const bombsPositions = generateBombs(squareNumber);
+
+    console.log(bombsPositions);
+
     let i = 0;
     while (i < squareNumber) {
 
@@ -36,14 +40,26 @@ function createField(elementDOM, squareNumber) {
 
             //console.log(this);
 
-            this.classList.toggle('bg-info')
-
             //squareTag.classList.toggle('d-none')
+
+            let playerPoints = 0;
+
+            if (bombsPositions.includes(squareValue)) {
+
+                this.classList.add('bg-danger')
+
+            } else {
+
+                this.classList.toggle('bg-info')
+
+                playerPoints++;
+
+            }
+            console.log(playerPoints);
         })
 
         i++;
     }
-
 }
 
 /**
@@ -58,12 +74,12 @@ function generateBombs(squareNumber) {
 
     for (let i = 0; i < bombNumber; i++) {
 
-        const bombPosition = Math.floor(Math.random() * (squareNumber + 1) );
-       // console.log(bombPosition);
+        const bombPosition = Math.floor(Math.random() * (squareNumber + 1));
+        // console.log(bombPosition);
 
         if (bombsPositions.includes(bombPosition)) {
             i--;
-        }else{
+        } else {
             bombsPositions.push(bombPosition);
         }
 
@@ -98,20 +114,14 @@ document.getElementById('generateGame').addEventListener('submit', function (e) 
     if (difficultDOM.value === 'easy') {
 
         createField(fieldDOM, 100);
-        generateBombs(100);
-        console.log(generateBombs(100));
 
     } else if (difficultDOM.value === 'mid') {
 
         createField(fieldDOM, 81);
-        generateBombs(81);
-        console.log(generateBombs(81));
 
     } else if (difficultDOM.value === 'hard') {
 
         createField(fieldDOM, 49);
-        generateBombs(49);
-        console.log(generateBombs(49));
 
     }
 
