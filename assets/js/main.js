@@ -33,7 +33,9 @@ function createField(elementDOM, squareNumber) {
 
         squareDOM.classList.add('square');
         squareDOM.style.width = `calc( 100% / ${Math.sqrt(squareNumber)})`;
-        squareTag.classList.add('d-none')
+        squareDOM.setAttribute('id',`square${i}`)
+        
+        squareTag.classList.add('d-none');
 
         elementDOM.append(squareDOM);
 
@@ -57,11 +59,10 @@ function createField(elementDOM, squareNumber) {
 
                 //this.removeEventListener('click', Event ) ;
 
-                for (let i = 0; i < squareNumber; i++) {
-                    
-                    const allSquareDOM = document.querySelectorAll('.square');
+                for (let i = 0; i < squareNumber; i++) {    
 
-                    allSquareDOM[i].removeEventListener('click', Event);
+
+                    document.getElementById(`square${i}`).removeEventListener('click', Event);
 
                     //console.log(allSquareDOM);
 
