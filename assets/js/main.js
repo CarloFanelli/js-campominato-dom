@@ -3,10 +3,14 @@
  * @param {} elementDOM element where the game has to be insert
  * @param {number} squareNumber number of square, for choosing difficult of the game
  */
+
+
 function createField(elementDOM, squareNumber) {
 
     const bombsPositions = generateBombs(squareNumber);
-   
+
+    let playerPoints = 0;
+
     let i = 0;
 
     while (i < squareNumber) {
@@ -34,7 +38,7 @@ function createField(elementDOM, squareNumber) {
         elementDOM.append(squareDOM);
 
         i++;
-        squareDOM.addEventListener('click', function () {
+        squareDOM.addEventListener('click', function Event () {
 
             console.log(squareValue);
 
@@ -42,15 +46,45 @@ function createField(elementDOM, squareNumber) {
 
             //squareTag.classList.toggle('d-none')
 
-            console.log(checkBomb(squareValue, bombsPositions, squareDOM));
+            /*             console.log(checkBomb(squareValue, bombsPositions, squareDOM, playerPoints));
+             */
+
+            if (bombsPositions.includes(squareValue)) {
+
+                this.classList.add('bg-danger')
+
+                document.getElementById('punteggio').innerHTML = `hai perso, il tuo punteggio è: ${playerPoints}`;
+
+                //this.removeEventListener('click', Event ) ;
+
+                for (let i = 0; i < squareNumber; i++) {
+                    
+                    const allSquareDOM = document.querySelectorAll('.square');
+
+                    allSquareDOM[i].removeEventListener('click', Event);
+
+                    //console.log(allSquareDOM);
+
+                }
+
+            } else if(!bombsPositions.includes(squareValue)){
+
+                this.classList.add('bg-info')
+
+                this.removeEventListener('click', Event);
+
+                ++playerPoints;
+                
+                document.getElementById('punteggio').innerHTML = playerPoints;
+
+            }
 
         })
     }
+
 }
 
-function checkBomb(squareValue, bombsPositions, squareDOM) {
-
-    let playerPoints = 0;
+/* function checkBomb(squareValue, bombsPositions, squareDOM,playerPoints) {
 
     if (bombsPositions.includes(squareValue)) {
 
@@ -63,13 +97,12 @@ function checkBomb(squareValue, bombsPositions, squareDOM) {
         playerPoints++;
 
     }
-    console.log(playerPoints);
+    //console.log(playerPoints);
 
     document.getElementById('punteggio').innerHTML = playerPoints;
 
     return playerPoints;
-
-}
+} */
 
 
 /**
@@ -115,7 +148,7 @@ document.getElementById('generateGame').addEventListener('submit', function (e) 
     if (difficultDOM.value === 'easy') {
 
         createField(fieldDOM, 100);
-        
+
     } else if (difficultDOM.value === 'mid') {
 
         createField(fieldDOM, 81);
