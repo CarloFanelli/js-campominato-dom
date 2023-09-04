@@ -6,10 +6,9 @@
 function createField(elementDOM, squareNumber) {
 
     const bombsPositions = generateBombs(squareNumber);
-
-    console.log(bombsPositions);
-
+   
     let i = 0;
+
     while (i < squareNumber) {
 
         const squareMarkup = `<div class="square">${i + 1}</div>`;
@@ -34,6 +33,7 @@ function createField(elementDOM, squareNumber) {
 
         elementDOM.append(squareDOM);
 
+        i++;
         squareDOM.addEventListener('click', function () {
 
             console.log(squareValue);
@@ -42,25 +42,35 @@ function createField(elementDOM, squareNumber) {
 
             //squareTag.classList.toggle('d-none')
 
-            let playerPoints = 0;
+            console.log(checkBomb(squareValue, bombsPositions, squareDOM));
 
-            if (bombsPositions.includes(squareValue)) {
-
-                this.classList.add('bg-danger')
-
-            } else {
-
-                this.classList.toggle('bg-info')
-
-                playerPoints++;
-
-            }
-            console.log(playerPoints);
         })
-
-        i++;
     }
 }
+
+function checkBomb(squareValue, bombsPositions, squareDOM) {
+
+    let playerPoints = 0;
+
+    if (bombsPositions.includes(squareValue)) {
+
+        squareDOM.classList.add('bg-danger')
+
+    } else {
+
+        squareDOM.classList.add('bg-info')
+
+        playerPoints++;
+
+    }
+    console.log(playerPoints);
+
+    document.getElementById('punteggio').innerHTML = playerPoints;
+
+    return playerPoints;
+
+}
+
 
 /**
  * 
@@ -91,15 +101,6 @@ function generateBombs(squareNumber) {
 
 }
 
-/* document.getElementById('create-field').addEventListener('click', function () {
-
-    const fieldDOM = document.querySelector('.field');
-
-    createField(fieldDOM, 100);
-
-}) */
-
-
 // game generator with difficults
 
 document.getElementById('generateGame').addEventListener('submit', function (e) {
@@ -114,7 +115,7 @@ document.getElementById('generateGame').addEventListener('submit', function (e) 
     if (difficultDOM.value === 'easy') {
 
         createField(fieldDOM, 100);
-
+        
     } else if (difficultDOM.value === 'mid') {
 
         createField(fieldDOM, 81);
@@ -126,6 +127,12 @@ document.getElementById('generateGame').addEventListener('submit', function (e) 
     }
 
 
+})
+
+// reload page to reset
+
+document.getElementById('reload').addEventListener('click', function () {
+    location.reload();
 })
 
 
