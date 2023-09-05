@@ -68,6 +68,11 @@ function createField(elementDOM, squareNumber) {
 
                 } */
 
+                document.getElementById('gameOver').classList.remove('d-none')
+                document.getElementById('gameOver').classList.add('d-block');
+
+                document.querySelector
+
             } else {
 
                 this.classList.add('bg-info')
